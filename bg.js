@@ -22,6 +22,11 @@ chrome.tabs.onUpdated.addListener( ( id, changeInfo, changedTab ) =>
 
 		var settings = await getSettings();
 
+		if ( settings.alternateIcon && settings.alternateIcon.trim() )
+		{
+			alertIcon = settings.alternateIcon;
+		}
+
 		if ( ! ( settings.applyTo == 'allTabs'
 			|| ( settings.applyTo == 'pinnedOnly'   &&  changedTab.pinned  )
 			|| ( settings.applyTo == 'unpinnedOnly' && !changedTab.pinned ) ) )
@@ -99,8 +104,9 @@ chrome.tabs.onActivated.addListener( activeInfo =>
 function getSettings()
 {
 	return new Promise( resolve => chrome.storage.sync.get( {
-		listType    : 'include',
-		listEntries : '',
-		applyTo     : 'allTabs',
+		listType      : 'include',
+		listEntries   : '',
+		applyTo       : 'allTabs',
+		alternateIcon : '',
 	}, resolve ) );
 }

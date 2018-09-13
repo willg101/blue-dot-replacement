@@ -3,7 +3,8 @@
 	<head>
 		<style>
 		select,
-		textarea
+		textarea,
+		input[type=text]
 		{
 			padding: 10px;
 			display: block;
@@ -22,6 +23,40 @@
 			margin-top: 20px;
 			color: rgba(0,0,0,0.5);
 		}
+		.icon-preview-container
+		{
+			background-color: rgb(204,204,204);
+			border-bottom: 1px solid rgb(156,156,156);
+			width: 100%;
+			position: relative;
+			overflow: hidden;
+			padding: 0;
+		}
+		.icon-preview-container .bg-img
+		{
+			margin: 0;
+			display: block;
+		}
+		.icon-preview
+		{
+			position: absolute;
+			height: 16px;
+			width: 16px;
+			top: 7px;
+		}
+		.icon-preview.pinned
+		{
+			left: 24px;
+		}
+		.icon-preview.unpinned
+		{
+			left: 66px;
+		}
+		.icon-preview-container.unpinned-only .icon-preview.pinned,
+		.icon-preview-container.pinned-only .icon-preview.unpinned
+		{
+			display: none;
+		}
 		</style>
 	</head>
 	<body>
@@ -39,6 +74,15 @@
 			<option value="pinnedOnly">Pinned tabs only</option>
 			<option value="unpinnedOnly">Unpinned tabs only</option>
 		</select>
+
+		<label for="alternateIcon">Alternate icon</label>
+		<input id="alternateIcon" placeholder="Paste an image or URL here" type="text" data-savable-name="alternateIcon"/>
+		<label>Preview</label>
+		<div class="icon-preview-container">
+			<img class="bg-img" src="img/icon_preview.png"/>
+			<img class="icon-preview pinned " />
+			<img class="icon-preview unpinned" />
+		</div>
 
 		<div class="credits">&copy; 2018 Will Groenendyk. Released under the MIT License.
 			<br>
