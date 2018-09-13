@@ -1,29 +1,28 @@
 {
-  "manifest_version": 2,
-  "name": "Blue Dot Replacement",
-  "description": "Show a flashing alert icon when an unfocused tab's title changes.",
-  "version": "1.0",
-  "author": "Will Groenendyk",
-  "icon" : "img/alarm_lg.png",
-  "options_ui": {
-    "chrome_style": true,
-    "page": "options.html",
-	"open_in_tab" : false
-  },
-  "background": {
-    "persistent": false,
-    "scripts": [ "bg.js" ]
-  },
-  "browser_action":
-  {
-    "default_icon": "img/alarm.png"
-  } ,
-  "web_accessible_resources" : [ "img/alarm.png" ],
-  "short_name" : "BDR",
-  "permissions": [
-	"tabs",
-	"storage",
-	"https://*/*",
-	"http://*/*"
-  ]
+	"manifest_version": 2,
+	"name": "Blue Dot Replacement",
+	"description": "Show a flashing alert icon when an unfocused tab's title changes.",
+	"version": "1.0",
+	"author": "Will Groenendyk",
+	"options_ui": {
+		"chrome_style": true,
+		"page": "options.html",
+		"open_in_tab": false
+	},
+	"background": {
+		"persistent": false,
+		"scripts": [ "bg.js" ]
+	},
+	"browser_action":
+	{
+		"default_icon": "img/alarm.png"
+	} ,
+	"web_accessible_resources" : [ "img/alarm.png" ],
+	"short_name" : "BDR",
+	"permissions": [
+		"tabs",
+		"storage",
+		"https://*/*",
+		"http://*/*"
+	]
 }
