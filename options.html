@@ -68,12 +68,19 @@
 		<textarea placeholder="https://example.com" rows="10" data-savable-name="listEntries"></textarea>
 		<p>Enter one URL per line.</p>
 
-		<label for="applyTo">Enable this extension on...</label>
+		<p><label for="applyTo">Enable this extension on...</label>
 		<select id="applyTo" data-savable-name="applyTo">
 			<option value="allTabs">All tabs</option>
 			<option value="pinnedOnly">Pinned tabs only</option>
 			<option value="unpinnedOnly">Unpinned tabs only</option>
-		</select>
+		</select></p>
+
+		<p><label for="flashIcon">Flash icon when active:</label>
+			<select id="flashIcon" data-savable-name="flashIcon">
+				<option value="enable">Flash when active</option>
+				<option value="disable">Never flash (static icon)</option>
+			</select>
+		</p>
 
 		<label for="alternateIcon">Alternate icon</label>
 		<input id="alternateIcon" placeholder="Paste an image or URL here" type="text" data-savable-name="alternateIcon"/>
