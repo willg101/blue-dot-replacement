@@ -55,21 +55,23 @@ chrome.tabs.onUpdated.addListener( ( id, changeInfo, changedTab ) =>
 
 			chrome.tabs.executeScript( id, {
 				code: `document.querySelectorAll( 'link[rel*="icon"]' ).forEach( el =>
-				{
-					if ( el.oldHref )
 					{
-						return;
-					}
-					el.oldHref = el.href;
-					el.href = "${alertIcon}"
-					let showingOld = false;
-					el.interval = setInterval( () =>
-					{
-						el.href = showingOld ? "${alertIcon}" : el.oldHref;
-						showingOld = !showingOld;
-					}, ${FLASH_INTERVAL_MS} );
-				} )` 
-			} );
+						if ( el.oldHref )
+						{
+							return;
+						}
+						el.oldHref = el.href;
+						el.href = "${alertIcon}"
+						if ("${settings.flashIcon}" != 'disable') {
+							let showingOld = false;
+							el.interval = setInterval( () =>
+							{
+								el.href = showingOld ? "${alertIcon}" : el.oldHref;
+								showingOld = !showingOld;
+							}, ${FLASH_INTERVAL_MS} );
+						}
+					} );`
+				} );
 		}
 	} );
 } );
@@ -91,9 +93,11 @@ chrome.tabs.onActivated.addListener( activeInfo =>
 						{
 							el.href = el.oldHref;
 							delete el.oldHref;
-							clearInterval( el.interval );
+							if ( el.interval ) {
+								clearInterval( el.interval );
+							}
 						}
-					} );` 
+					} );`
 		} );
 	} );
 } );
@@ -108,5 +112,6 @@ function getSettings()
 		listEntries   : '',
 		applyTo       : 'allTabs',
 		alternateIcon : '',
+		flashIcon     : 'enable',
 	}, resolve ) );
 }
