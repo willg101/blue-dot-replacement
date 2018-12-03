@@ -108,7 +108,7 @@ chrome.tabs.onActivated.addListener( activeInfo =>
 function getSettings()
 {
 	return new Promise( resolve => chrome.storage.sync.get( {
-		listType      : 'include',
+		listType      : 'enable',
 		listEntries   : '',
 		applyTo       : 'allTabs',
 		alternateIcon : '',
