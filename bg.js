@@ -78,28 +78,36 @@ chrome.tabs.onUpdated.addListener( ( id, changeInfo, changedTab ) =>
 
 chrome.tabs.onActivated.addListener( activeInfo =>
 {
-	chrome.tabs.get( activeInfo.tabId, tab =>
-	{
-		if ( !tab || tab.url.startsWith( 'chrome://' ) )
+	function handler() {
+		chrome.tabs.get( activeInfo.tabId, tab =>
 		{
-			return;
-		}
+			if ( chrome.runtime.lastError ) {
+				setTimeout( handler, 50 );
+				return;
+			}
 
-		chrome.tabs.executeScript( activeInfo.tabId, {
-			code: `document.querySelectorAll( 'link[rel*="icon"]' )
-					.forEach( el =>
-					{
-						if ( el.oldHref )
+			if ( !tab || tab.url.startsWith( 'chrome://' ) )
+			{
+				return;
+			}
+
+			chrome.tabs.executeScript( activeInfo.tabId, {
+				code: `document.querySelectorAll( 'link[rel*="icon"]' )
+						.forEach( el =>
 						{
-							el.href = el.oldHref;
-							delete el.oldHref;
-							if ( el.interval ) {
-								clearInterval( el.interval );
+							if ( el.oldHref )
+							{
+								el.href = el.oldHref;
+								delete el.oldHref;
+								if ( el.interval ) {
+									clearInterval( el.interval );
+								}
 							}
-						}
-					} );`
+						} );`
+			} );
 		} );
-	} );
+	}
+	handler();
 } );
 
 /**
